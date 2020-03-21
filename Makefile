@@ -1,14 +1,14 @@
-db: db.c
-	gcc db.c -o db
+SOURCES = src/table.c src/btree.c src/pager.c src/utils.c src/db.c
+
+CC = gcc
+CFLAGS = 
+INCLUDES = include
+
+db: ${SOURCES}
+	${CC} ${CFLAGS} -I ${INCLUDES} -o $@ ${SOURCES}
 
 run: db
 	./db mydb.db
 
 clean:
-	rm -f db *.db
-
-test: db
-	bundle exec rspec
-
-format: *.c
-	clang-format -style=Google -i *.c
+	rm db
